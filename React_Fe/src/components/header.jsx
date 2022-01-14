@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import SearchForm from './searchForm'
 import logo from './../img/logo-big.svg'
 import i18n from './../i18n.json'
+import { isLogin } from '../utils/login'
 
 export default function Header({ lang }) {
   const [data, setData] = useState(null)
@@ -49,10 +50,12 @@ export default function Header({ lang }) {
               <img className='img-fluid text-center resized-logo' src={logo} alt='logo' />
             </a>
           </div>
-          <div className='col-md-auto col-12 align-self-end order-1 order-md-0'>
-            <SearchForm lang={lang} labels={labels} />
-            <h1 className='d-none d-md-block'>{labels.inputLabel[lang]}</h1>
-          </div>
+          {isLogin() && (
+            <div className='col-md-auto col-12 align-self-end order-1 order-md-0'>
+              <SearchForm lang={lang} labels={labels} />
+              <h1 className='d-none d-md-block'>{labels.inputLabel[lang]}</h1>
+            </div>
+          )}
 
         </div>
       </div>
