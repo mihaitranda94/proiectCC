@@ -50,13 +50,10 @@ export default function Header({ lang }) {
               <img className='img-fluid text-center resized-logo' src={logo} alt='logo' />
             </a>
           </div>
-          {isLogin() && (
-            <div className='col-md-auto col-12 align-self-end order-1 order-md-0'>
-              <SearchForm lang={lang} labels={labels} />
-              <h1 className='d-none d-md-block'>{labels.inputLabel[lang]}</h1>
-            </div>
-          )}
-
+          <div className='col-md-auto col-12 align-self-end order-1 order-md-0'>
+            <SearchForm lang={lang} labels={labels} />
+            <h1 className='d-none d-md-block'>{labels.inputLabel[lang]}</h1>
+          </div>
         </div>
       </div>
     </div>

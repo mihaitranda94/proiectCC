@@ -34,7 +34,7 @@ export default function Register() {
       }),
     };
 
-    const registerRequest = await fetch ('api/users/register', requestOptions);
+    const registerRequest = await fetch ('api/register', requestOptions);
     if (registerRequest.status === 200) {
       history.push ('/signin');
     } 
@@ -117,7 +117,7 @@ export default function Register() {
                         type="submit"
                         className="btn btn-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                       >
-                        Sign in
+                        Register
                       </button>
                       <Link to="/signin">
                         <p className="mt-3">

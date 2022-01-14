@@ -29,9 +29,11 @@ export default function SignIn () {
       }),
     };
 
-    const signinRequest = await fetch ('api/users/login', requestOptions);
+    const signinRequest = await fetch ('api/login', requestOptions);
     if (signinRequest.status === 200) {
-      history.push ('/signin');
+      const user = await signinRequest.json();
+      login(user[0].id);
+      history.push ('/');
     } 
   };
 
