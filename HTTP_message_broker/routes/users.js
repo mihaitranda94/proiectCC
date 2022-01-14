@@ -8,7 +8,7 @@ Router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const postMovieLogin = {
-        url: `http://${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/login`,
+        url: `http://localhost:5002/${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/login`,
         method: "POST",
         data: {
             email,
@@ -26,7 +26,7 @@ Router.post("/register", async (req, res) => {
     const { first_name, last_name, email, password, phone } = req.body;
 
     const postBookRequest = {
-        url: `http://${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/register`,
+        url: `http://localhost:5002/${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/register`,
         method: "POST",
         data: {
             first_name,

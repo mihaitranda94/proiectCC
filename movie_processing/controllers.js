@@ -92,12 +92,11 @@ Router.get('/topRatedRecommended', async (req, res) => {
 });
 
 Router.get('/movieDetails/:tmdbId', async (req, res) => {
-    console.log(`/api/movies/movieDetails/:id endpoint has been called!`)
     const id = req.params.tmdbId
     console.log(id)
     optionsMovieDetails.url = `https://api.themoviedb.org/3/movie/${id}`
     res.json(await apiCall(optionsMovieDetails))
-    console.log(`/api/movies/movieDetails/:id endpoint has finished!`)
+    console.log(`/api/movies/movieDetails/:id endpoint has been called!`)
 
 });
 

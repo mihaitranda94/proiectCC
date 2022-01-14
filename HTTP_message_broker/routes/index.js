@@ -5,7 +5,7 @@ const UsersRoute = require('./users.js');
 
 
 Router.use('/', MoviesRoute);
-Router.use('/users', UsersRoute);
+Router.use('/', UsersRoute);
 
 
 module.exports = Router;
