@@ -8,6 +8,9 @@ import MovieDetailsWrapper from './movieDetailsWrapper'
 import Page404 from './404'
 import LangSelector from './langSelector'
 import urlParamFinder from './../lib/urlParamFinder'
+import PrivateRoute from './privateRoute';
+import SignIn from './signin';
+import Register from './register';
 
 export default function App() {
   const [lang] = useState(urlParamFinder() || 'en')
@@ -21,9 +24,11 @@ export default function App() {
       <Header lang={lang} />
       <BrowserRouter>
         <Switch>
-          <Route exact path='/:lang' component={HomepageWrapper} />
+          <Route path='/signin' component={SignIn} />
+          <Route path='/register' component={Register} />
+          <PrivateRoute exact path='/:lang' component={HomepageWrapper} />
           <Redirect exact from='/' to={`/${lang}`} />
-          <Route path='/:lang/movie/:id' component={MovieDetailsWrapper} />
+          <PrivateRoute path='/:lang/movie/:id' component={MovieDetailsWrapper} />
           <Route component={Page404} />
         </Switch>
       </BrowserRouter>
