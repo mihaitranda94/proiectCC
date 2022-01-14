@@ -20,7 +20,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api", routes);
+app.use("/api/movies", routes);
 
 app.use((err, req, res, next) => {
   console.error(err);

@@ -28,14 +28,14 @@ Router.get("/topRatedRecommended", async (req, res) => {
 
 
 Router.get("/movieDetails/:tmdbId", async (req, res) => {
-    const { tmdbId } = req.params;
+    const  id  = req.params.tmdbId
 
-    console.info(`Forwarding request for get movie details by id ${tmdbId} ...`);
+    console.info(`Forwarding request for get movie details by id ${id} ...`);
 
     const getMovieDetailsTmdbIdRequest = {
-        url: `http://${process.env.MOVIE_PROCESSING_ROUTE}/movieDetails/:tmdbId`,
+        url: `http://localhost:5001/${process.env.MOVIE_PROCESSING_ROUTE}/movieDetails/${id}`,
     };
-
+    console.error(getMovieDetailsTmdbIdRequest.url)
     const MovieDetails = await sendRequest(getMovieDetailsTmdbIdRequest);
 
     res.json(MovieDetails);
@@ -47,7 +47,7 @@ Router.get("/movieAutocomplete", async (req, res) => {
     const query = req.query.q
 
     const getAutocomplete = {
-        url: `http://${process.env.MOVIE_PROCESSING_ROUTE}/movieAutocomplete?q=${query}}`,
+        url: `http://localhost:5001/${process.env.MOVIE_PROCESSING_ROUTE}/movieAutocomplete?q=${query}`,
     };
 
     const autocompleteResponse = await sendRequest(getAutocomplete);

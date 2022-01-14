@@ -11,7 +11,8 @@ export default function MovieDetails({ selectedMovie, lang }) {
 
   const getTmdbApi = useCallback(async () => {
     try {
-      const response = await fetch('/api/movieDetails/${id}')
+      const queryUrl = `/api/movieDetails/${id}`
+      const response = await fetch(queryUrl)
       const json = await response.json()
       // issue: #83; docs: https://www.themoviedb.org/documentation/api/status-codes
       if (json.status_code > 1) throw new Error('The resource you requested could not be found.')

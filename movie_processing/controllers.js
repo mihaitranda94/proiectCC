@@ -78,19 +78,34 @@ async function apiCall(options) {
 }
 
 
-Router.get('/movies/trending', async (req, res) => {
+Router.get('/trending', async (req, res) => {
     res.json(await apiCall(optionsTrending))
     console.log(`/api/movies/trending endpoint has been called!`)
 
 });
 
-Router.get('/movies/topRatedRecommended', async (req, res) => {
-    res.status(200).json(await apiCall(optionsTopRatedRecommended))
+Router.get('/topRatedRecommended', async (req, res) => {
+    res.json(await apiCall(optionsTopRatedRecommended))
 
-    res.status(404).json('not found')
-    res.status(500).json('Internal Server Error :(')
+    
     console.log(`/api/movies/topRatedRecommended endpoint has been called!`)
 });
 
+Router.get('/movieDetails/:tmdbId', async (req, res) => {
+    console.log(`/api/movies/movieDetails/:id endpoint has been called!`)
+    const id = req.params.tmdbId
+    console.log(id)
+    optionsMovieDetails.url = `https://api.themoviedb.org/3/movie/${id}`
+    res.json(await apiCall(optionsMovieDetails))
+    console.log(`/api/movies/movieDetails/:id endpoint has finished!`)
+
+});
+
+Router.get('/movieAutocomplete', async (req, res) => {
+    const query = req.query.q
+    optionsMovieAutocomplete.qs.query = query
+    res.json(await apiCall(optionsMovieAutocomplete))
+    console.log(`/api/movies/movieAutocomplete?q=${query} endpoint has been called!`)
+  })
 
 module.exports = Router;
