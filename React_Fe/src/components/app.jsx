@@ -20,7 +20,7 @@ export default function App() {
       <nav className='lang-position'>
         <LangSelector lang={lang} currentLang='en' /> <LangSelector lang={lang} currentLang='sv' />
       </nav>
-      <CookieBar lang={lang} />
+      {/* <CookieBar lang={lang} /> */}
       <Header lang={lang} />
       <BrowserRouter>
         <Switch>
