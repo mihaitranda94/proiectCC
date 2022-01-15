@@ -8,6 +8,4 @@ RUN ["npm", "ci"]
 
 COPY . .
 
-EXPOSE 5002
-
 CMD ["npm", "run", "start"]

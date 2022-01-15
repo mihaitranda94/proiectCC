@@ -11,7 +11,7 @@ export default function SearchForm({ lang, labels }) {
     async function getTmdbApi() {
       if (keyword !== '' && keyword.length > 2) {
         try {
-          const response = await fetch(`/api/movieAutocomplete?q=${keyword.toLowerCase()}`)
+          const response = await fetch(`http://localhost:5000/api/movieAutocomplete?q=${keyword.toLowerCase()}`)
           const json = await response.json()
           setData(json)
           setDataIsReady(true)

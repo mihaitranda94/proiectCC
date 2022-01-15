@@ -1,9 +1,11 @@
+version: "3.8"
+
 services:
 
   React_Fe:
     image: cc/react_fe
     ports:
-      - 3000:80
+      - 3000:3000
     environment:
       NODE_ENV: development
     deploy:
@@ -21,8 +23,6 @@ services:
 
   HTTP_message_broker:
     image: cc/http_message_broker
-    ports:
-      - 5000:80
     environment:
       MOVIE_PROCESSING_ROUTE: api/movies
       USER_MANAGEMENT_PROCESSING_ROUTE: api/users
@@ -44,8 +44,6 @@ services:
 
   movie_processing:
     image: cc/movies
-    ports:
-      - 5001:80
     environment:
       NODE_ENV: development
     deploy:
@@ -63,8 +61,6 @@ services:
 
   user_management_processing:
     image: cc/users
-    ports:
-      - 5001:80
     environment:
       PGUSER: postgres
       PGPASSWORD: postgres
@@ -86,8 +82,6 @@ services:
 
   postgres:
     image: postgres:9.4
-    ports:
-      - "5432:5432"
     volumes:
       - ./db/init-db.sql:/docker-entrypoint-initdb.d/init.sql
       - db-volume:/var/lib/postgresql/data
