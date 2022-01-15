@@ -1,6 +1,88 @@
-version: "3.1"
-
 services:
+
+  React_Fe:
+    image: cc/react_fe
+    ports:
+      - 3000:80
+    environment:
+      NODE_ENV: development
+    deploy:
+      replicas: 3
+      placement:
+        max_replicas_per_node: 2
+      update_config:
+        parallelism: 2
+        order: start-first
+      rollback_config:
+        parallelism: 2
+        order: stop-first
+    networks:
+      - gateway
+
+  HTTP_message_broker:
+    image: cc/http_message_broker
+    ports:
+      - 5000:80
+    environment:
+      MOVIE_PROCESSING_ROUTE: api/movies
+      USER_MANAGEMENT_PROCESSING_ROUTE: api/users
+      NODE_ENV: development
+    deploy:
+      replicas: 3
+      placement:
+        max_replicas_per_node: 2
+      update_config:
+        parallelism: 2
+        order: start-first
+      rollback_config:
+        parallelism: 2
+        order: stop-first
+    networks:
+      - gateway
+      - movies
+      - users
+
+  movie_processing:
+    image: cc/movies
+    ports:
+      - 5001:80
+    environment:
+      NODE_ENV: development
+    deploy:
+      replicas: 3
+      placement:
+        max_replicas_per_node: 2
+      update_config:
+        parallelism: 2
+        order: start-first
+      rollback_config:
+        parallelism: 2
+        order: stop-first
+    networks:
+      - movies
+
+  user_management_processing:
+    image: cc/users
+    ports:
+      - 5001:80
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGHOST: localhost
+      PGPORT: 5432
+      PGDATABASE: userdb
+      NODE_ENV: development
+    deploy:
+      replicas: 3
+      placement:
+        max_replicas_per_node: 2
+      update_config:
+        order: start-first
+      rollback_config:
+        order: stop-first
+    networks:
+      - users
+      - db
 
   postgres:
     image: postgres:9.4
@@ -8,13 +90,39 @@ services:
       - "5432:5432"
     volumes:
       - ./db/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-volume:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: userdb
       POSTGRES_PASSWORD: postgres
+    networks:
+      - db
+      - db-adminer
 
   adminer:
     image: adminer
     restart: always
     ports:
-    - 8080:8080
+      - 8080:8080
+    networks:
+      - db-adminer
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - 8081:8080
+    deploy:
+      placement:
+        constraints:
+          - "node.role==manager"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+volumes:
+  db-volume: null
+networks:
+  gateway: null
+  movies: null
+  users: null
+  db: null
+  db-adminer: null
