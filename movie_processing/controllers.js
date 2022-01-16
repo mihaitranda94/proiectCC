@@ -3,11 +3,16 @@ const express = require('express')
 const request = require('request')
 const path = require('path')
 
+
+const {
+    getSecret
+  } = require('docker-secret');
+
 const {
     ServerError
 } = require('./errors');
 
-const tmdbApiKey = "68ce5d35cd89de62e1fc171bbcaa753a"
+const tmdbApiKey = process.env.NODE_ENV === 'development' ? process.env.API : getSecret(process.env.API)
 
 const optionsTrending = {
     method: 'GET',
