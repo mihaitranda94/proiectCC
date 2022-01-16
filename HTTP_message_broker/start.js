@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const helmet = require("helmet");
+const cors = require("cors");
 const createError = require("http-errors");
 require('dotenv').config()
 require("express-async-errors");
@@ -10,6 +11,8 @@ const { ServerError } = require('./errors');
 const routes = require("./routes");
 
 const app = express();
+
+app.use(cors)
 
 app.use(helmet());
 app.use(
