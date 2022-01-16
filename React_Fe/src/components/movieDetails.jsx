@@ -11,7 +11,7 @@ export default function MovieDetails({ selectedMovie, lang }) {
 
   const getTmdbApi = useCallback(async () => {
     try {
-      const queryUrl = `http://localhost:5000/api/movieDetails/${id}`
+      const queryUrl = `http://192.168.149.128:5000/api/movieDetails/${id}`
       const response = await fetch(queryUrl)
       const json = await response.json()
       // issue: #83; docs: https://www.themoviedb.org/documentation/api/status-codes

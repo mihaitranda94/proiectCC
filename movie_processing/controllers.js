@@ -79,6 +79,7 @@ async function apiCall(options) {
 
 
 Router.get('/trending', async (req, res) => {
+    console.log(`/api/movies/trending endpoint has been called!                   ${req}`)
     res.json(await apiCall(optionsTrending))
     console.log(`/api/movies/trending endpoint has been called!`)
 

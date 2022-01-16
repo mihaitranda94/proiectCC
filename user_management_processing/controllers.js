@@ -24,7 +24,7 @@ Router.post('/login', async (req, res) => {
 
 Router.post('/register', async (req, res) => {
     console.log(`/api/users/register endpoint has been called and will register the user in the database!`)
-
+    console.log(req.body)
     const { first_name, last_name, email, password, phone } = req.body
     try {
         const user = await query("INSERT INTO users (first_name, last_name, email, password, phone) VALUES ($1, $2, $3, $4, $5) RETURNING *",
