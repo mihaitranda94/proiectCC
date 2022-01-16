@@ -23,7 +23,6 @@ services:
 
   HTTP_message_broker:
     image: cc/http_message_broker
-    container_name: HTTP_message_broker
     environment:
       MOVIE_PROCESSING_ROUTE: api/movies
       USER_MANAGEMENT_PROCESSING_ROUTE: api/users
@@ -45,7 +44,6 @@ services:
 
   movie_processing:
     image: cc/movies
-    container_name: movie_processing
     environment:
       NODE_ENV: development
     deploy:
@@ -63,7 +61,6 @@ services:
 
   user_management_processing:
     image: cc/users
-    container_name: user_management_processing
     environment:
       PGUSER: postgres
       PGPASSWORD: postgres
@@ -85,7 +82,6 @@ services:
 
   postgres:
     image: postgres:9.
-    container_name: postgres
     volumes:
       - ./db/init-db.sql:/docker-entrypoint-initdb.d/init.sql
       - db-volume:/var/lib/postgresql/data
@@ -120,7 +116,12 @@ volumes:
   db-volume:
 networks:
   gateway:
+    driver: overlay
   movies:
+    driver: overlay
   users:
+    driver: overlay
   db:
+    driver: overlay
   db-adminer:
+    driver: overlay

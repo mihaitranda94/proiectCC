@@ -34,7 +34,7 @@ export default function Register() {
       }),
     };
 
-    const registerRequest = await fetch ('http://HTTP_message_broker:5000/api/register', requestOptions);
+    const registerRequest = await fetch ('http://localhost:5000/api/register', requestOptions);
     if (registerRequest.status === 200) {
       history.push ('/signin');
     } 

@@ -6,7 +6,7 @@ Router.get("/trending", async (req, res) => {
     console.info(`Forwarding request for get trending movies ...`);
 
     const getTrendingMovies = {
-        url: 'http://movie_processing:5001/api/movies/trending',
+        url: `http://${process.env.HOST}:5001/api/movies/trending`,
     };
     console.log(process.env.MOVIE_PROCESSING_ROUTE)
     const trending = await sendRequest(getTrendingMovies);
@@ -16,9 +16,8 @@ Router.get("/trending", async (req, res) => {
 
 Router.get("/topRatedRecommended", async (req, res) => {
     console.info(`Forwarding request for getting top rated movie recommendations ...`);
-
     const getTopRated= {
-        url: `http://movie_processing:5001/${process.env.MOVIE_PROCESSING_ROUTE}/topRatedRecommended`,
+        url: `http://${process.env.HOST}:5001/${process.env.MOVIE_PROCESSING_ROUTE}/topRatedRecommended`,
     };
 
     const topRatedResponse = await sendRequest(getTopRated);
@@ -29,11 +28,11 @@ Router.get("/topRatedRecommended", async (req, res) => {
 
 Router.get("/movieDetails/:tmdbId", async (req, res) => {
     const  id  = req.params.tmdbId
-
+    res.set('Access-Control-Allow-Origin', '*');
     console.info(`Forwarding request for get movie details by id ${id} ...`);
 
     const getMovieDetailsTmdbIdRequest = {
-        url: `http://movie_processing:5001/${process.env.MOVIE_PROCESSING_ROUTE}/movieDetails/${id}`,
+        url: `http://${process.env.HOST}:5001/${process.env.MOVIE_PROCESSING_ROUTE}/movieDetails/${id}`,
     };
     console.error(getMovieDetailsTmdbIdRequest.url)
     const MovieDetails = await sendRequest(getMovieDetailsTmdbIdRequest);
@@ -45,9 +44,9 @@ Router.get("/movieDetails/:tmdbId", async (req, res) => {
 Router.get("/movieAutocomplete", async (req, res) => {
     console.info(`Forwarding request for getting top rated movie recommendations ...`);
     const query = req.query.q
-
+    res.set('Access-Control-Allow-Origin', '*');
     const getAutocomplete = {
-        url: `http://movie_processing:5001/${process.env.MOVIE_PROCESSING_ROUTE}/movieAutocomplete?q=${query}`,
+        url: `http://${process.env.HOST}:5001/${process.env.MOVIE_PROCESSING_ROUTE}/movieAutocomplete?q=${query}`,
     };
 
     const autocompleteResponse = await sendRequest(getAutocomplete);

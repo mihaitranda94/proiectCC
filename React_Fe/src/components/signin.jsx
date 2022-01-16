@@ -29,7 +29,7 @@ export default function SignIn () {
       }),
     };
 
-    const signinRequest = await fetch ('http://HTTP_message_broker:5000/api/login', requestOptions);
+    const signinRequest = await fetch ('http://localhost:5000/api/login', requestOptions);
     if (signinRequest.status === 200) {
       const user = await signinRequest.json();
       login(user[0].id);

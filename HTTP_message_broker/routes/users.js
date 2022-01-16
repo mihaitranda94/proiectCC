@@ -6,9 +6,9 @@ const { sendRequest } = require("../http-client");
 
 Router.post("/login", async (req, res) => {
     const { email, password } = req.body;
-
+    res.set('Access-Control-Allow-Origin', '*');
     const postMovieLogin = {
-        url: `http://user_management_processing:5002/${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/login`,
+        url: `http://${process.env.HOST}:5002/${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/login`,
         method: "POST",
         data: {
             email,
@@ -24,9 +24,9 @@ Router.post("/login", async (req, res) => {
 
 Router.post("/register", async (req, res) => {
     const { first_name, last_name, email, password, phone } = req.body;
-
+    res.set('Access-Control-Allow-Origin', '*');
     const postBookRequest = {
-        url: `http://user_management_processing:5002/${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/register`,
+        url: `http://${process.env.HOST}:5002/${process.env.USER_MANAGEMENT_PROCESSING_ROUTE}/register`,
         method: "POST",
         data: {
             first_name,

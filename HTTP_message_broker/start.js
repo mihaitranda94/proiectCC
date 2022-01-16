@@ -12,7 +12,7 @@ const routes = require("./routes");
 
 const app = express();
 
-app.use(cors)
+app.use(cors())
 
 app.use(helmet());
 app.use(
@@ -26,6 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api", routes);
 
 app.use((err, req, res, next) => {
+  res.set('Access-Control-Allow-Origin', '*');
   console.error(err);
   let status = 500;
   let message = "Something Bad Happened";
