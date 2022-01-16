@@ -11,7 +11,7 @@ export default function Header({ lang }) {
 
   const getTmdbApi = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/topRatedRecommended')
+      const response = await fetch('http://HTTP_message_broker:5000/api/topRatedRecommended')
       const json = await response.json()
       setData(json)
       setDataIsReady(true)
