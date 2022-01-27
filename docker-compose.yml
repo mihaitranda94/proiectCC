@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   react_fe:
-    image: cc/react_fe
+    image: claudiu98n/react-frontend
     ports:
       - 3000:3000
     environment:
@@ -12,7 +12,7 @@ services:
       - gateway
 
   httpmessagebroker:
-    image: cc/http_message_broker
+    image: claudiu98n/http-message-broker
     ports:
       - 5000:5000
     environment:
@@ -35,7 +35,7 @@ services:
       - users
 
   movie_processing:
-    image: cc/movies
+    image: claudiu98n/movie-processing
     environment:
       NODE_ENV: development
       API: 68ce5d35cd89de62e1fc171bbcaa753a
@@ -53,7 +53,7 @@ services:
       - movies
 
   user_management_processing:
-    image: cc/users
+    image: claudiu98n/user-management-processing
     environment:
       PGUSER: postgres
       PGPASSWORD: postgres
