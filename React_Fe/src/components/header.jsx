@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import SearchForm from './searchForm'
 import logo from './../img/logo-big.svg'
 import i18n from './../i18n.json'
-import { isLogin } from '../utils/login'
+import axios from 'axios';
 
 export default function Header({ lang }) {
   const [data, setData] = useState(null)
@@ -11,9 +11,8 @@ export default function Header({ lang }) {
 
   const getTmdbApi = useCallback(async () => {
     try {
-      const response = await fetch('http://192.168.149.128:5000/api/topRatedRecommended')
-      const json = await response.json()
-      setData(json)
+      const response = await axios.get('http://httpmessagebroker:5000/api/topRatedRecommended')
+      setData(response.data)
       setDataIsReady(true)
     } catch (e) {
       console.error(e)

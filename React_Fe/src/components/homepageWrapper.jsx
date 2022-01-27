@@ -10,7 +10,7 @@ export default function HomepageWrapper() {
 
   const getTmdbApi = useCallback(async () => {
     try {
-      const response = await fetch('http://192.168.149.128:5000/api/trending')
+      const response = await fetch('http://localhost:5000/api/trending')
       const json = await response.json()
       setData(json)
       console.info(json)
