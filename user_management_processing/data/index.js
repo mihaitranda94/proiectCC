@@ -14,6 +14,8 @@ const {
     password: process.env.NODE_ENV === 'development' ? process.env.PGPASSWORD : getSecret(process.env.PGPASSWORD_FILE)
   }
   
+  console.log(options)
+
   const pool = new Pool(options);
   
   const query = async (text, params) => {

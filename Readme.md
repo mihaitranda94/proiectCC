@@ -20,3 +20,8 @@ Dupa ce imaginile au fost create, se ruleaza urmatoarea comanda pentru a crea st
 
 Odata ce stack-ul are fiecare serviciu Running (docker stack ps proiectCC), serviciul de frontend se poate apela din browser. Ca exemplu de URL:
     http://192.168.149.128:3000/signin
+
+
+docker secret create user_secret ./Secrets/user_secret.txt
+docker secret create pass_secret ./Secrets/pass_secret.txt
+docker secret create api_secret ./Secrets/api_secret.txt
